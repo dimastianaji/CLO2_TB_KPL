@@ -12,7 +12,7 @@ is_late() digunakan untuk menyeleksi tugas yang melewati deadline.
 
 Format penampilan data tugas (__str__) diatur dalam satu tempat sehingga semua tampilan konsisten.
 
-⚙️ 2. Parameterization (Pengaturan Nilai Lewat Parameter)
+ 2. Parameterization (Pengaturan Nilai Lewat Parameter)
 Program menghindari hardcoding dengan penggunaan parameter:
 
 Deadline tugas ditentukan melalui parameter deadline_str pada class Task.
