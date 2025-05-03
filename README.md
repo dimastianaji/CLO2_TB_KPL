@@ -1,65 +1,81 @@
- Fitur dan Penerapan Prinsip Pemrograman
- 1. Code Reuse (Pemanfaatan Kode Ulang)
-Program ini menerapkan code reuse melalui pemisahan logika ke dalam method dan class yang modular:
 
-Method determine_status() dan is_late() pada class Task digunakan ulang oleh beberapa bagian kode seperti update_progress() dan pengecekan status tugas di TaskManager.
+ 1. Parameterization (Pengaturan nilai lewat parameter)
+Artinya: nilai-nilai penting seperti deadline, progress, format tanggal, tidak ditulis langsung (hardcoded), tapi bisa diatur lewat parameter atau konfigurasi.
 
-Class TaskManager menggunakan kembali method milik Task untuk operasi manajemen tugas, seperti:
+Contoh di kode :
 
-update_progress() dipanggil ulang saat memperbarui progres tugas.
 
-is_late() digunakan untuk menyeleksi tugas yang melewati deadline.
 
-Format penampilan data tugas (__str__) diatur dalam satu tempat sehingga semua tampilan konsisten.
+class Task:
+    def __init__(self, title, deadline_str, progress=0):  # ← parameterisasi judul, deadline, dan progress
+        self.deadline = datetime.datetime.strptime(deadline_str, config.time_format)  # ← format tanggal pakai config
 
- 2. Parameterization (Pengaturan Nilai Lewat Parameter)
-Program menghindari hardcoding dengan penggunaan parameter:
 
-Deadline tugas ditentukan melalui parameter deadline_str pada class Task.
 
-Progress awal tugas juga bisa diatur lewat parameter default progress=0.
+class Config:
+    def __init__(self):
+        self.time_format = "%Y-%m-%d"  # ← global setting, bukan ditulis ulang di setiap tempat
+ 
+ Manfaatnya:
 
-Format tanggal diatur secara global melalui objek config, bukan ditulis langsung dalam logika parsing.
+Mudah diubah saat testing atau konfigurasi lain.
 
-Keuntungan:
+Konsisten di seluruh aplikasi (misalnya format tanggal).
 
-Memudahkan pengujian dan perubahan tanpa mengedit seluruh kode.
+Lebih fleksibel untuk dikembangkan.
 
-Memberi fleksibilitas dalam membuat tugas dengan berbagai konfigurasi.
+ 2. Code Reuse (Pemanfaatan ulang kode)
+Artinya: logika atau fungsi yang sama digunakan di banyak tempat, supaya tidak ditulis ulang.
 
- 3. Generic (Generik / Tipe Umum)
-Saat ini, kode belum sepenuhnya menerapkan tipe generik, tetapi dapat dikembangkan untuk mendukungnya, terutama jika ingin membuat manajer tugas lebih fleksibel terhadap tipe objek lain (misalnya Event, Reminder, dll).
+Contoh reuse di dalam class Task:
 
-Contoh Implementasi Generik (Menggunakan Python typing.Generic)
-python
-Salin
-Edit
-from typing import TypeVar, Generic, List
 
-T = TypeVar('T')  # Tipe generik
+
+def update_progress(self, new_progress):
+    self.progress = new_progress
+    self.status = self.determine_status()  # ← pakai ulang method determine_status()
+
+
+
+def __str__(self):
+    late_flag = " TERLAMBAT" if self.is_late() else ""  # ← pakai ulang method is_late()
+Contoh reuse di dalam class TaskManager:
+
+
+
+
+def update_task_progress(self, title, new_progress):
+    for task in self.tasks:
+        if task.title == title:
+            task.update_progress(new_progress)  # ← pakai method bawaan Task
+ 
+ Manfaatnya:
+
+Kode lebih pendek dan rapi.
+
+Mengurangi duplikasi.
+
+Jika logika diubah, cukup ubah di satu tempat saja.
+
+ 3. Generic (Tipe Umum)
+Artinya: membuat class atau fungsi yang bisa dipakai untuk tipe data apa pun, tidak hanya Task. Misalnya bisa dipakai untuk Event, Reminder, dll.
+
+Contoh implementasi:
+
+T = TypeVar('T')
 
 class Manager(Generic[T]):
     def __init__(self):
-        self.items: List[T] = []
+        self.items: List[T] = []  # ← bisa menyimpan apa pun: Task, Event, dll
+Lalu, kita bisa pakai seperti ini:
 
-    def add(self, item: T):
-        self.items.append(item)
 
-    def remove(self, item: T):
-        self.items.remove(item)
-
-    def get_all(self) -> List[T]:
-        return self.items
-Dengan itu, kita bisa membuat manajer tugas generik:
-
-python
-Salin
-Edit
 task_manager = Manager[Task]()
-task_manager.add(Task("Tugas 1", "2025-05-05"))
-Manfaat:
+event_manager = Manager[Event]()  # ← manager ini bisa digunakan ulang untuk jenis data yang berbeda
+ Manfaatnya:
 
-Generik ini memungkinkan manajemen berbagai jenis objek selain Task, tanpa membuat ulang class baru.
+Kode jadi lebih fleksibel dan reusable.
 
-Meningkatkan fleksibilitas dan reusability sistem.
+Tidak perlu bikin ulang class yang sama untuk setiap jenis data.
 
+ 
