@@ -63,8 +63,3 @@ Generik ini memungkinkan manajemen berbagai jenis objek selain Task, tanpa membu
 
 Meningkatkan fleksibilitas dan reusability sistem.
 
-Rangkuman
-Prinsip	Penerapan
-Code Reuse	Method dan class reusable, pemisahan logika
-Parameterization	Nilai seperti deadline, progress, dan format tanggal bisa dikonfigurasi
-Generic	Dapat diterapkan melalui Generic[T] untuk membuat manajer tugas fleksibel
