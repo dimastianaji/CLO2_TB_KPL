@@ -35,4 +35,25 @@ Membangun aplikasi manajemen tugas yang bersih, terstruktur, dan mudah dikembang
 ---
 
 ## 🗂️ Struktur Proyek
+todo_app/
+├── main.py # Entry-point CLI
+├── config.py # Konfigurasi aplikasi
+├── models.py # TodoItem & FSM (State Pattern)
+├── factory.py # TaskFactory (Factory Pattern)
+├── commands.py # Command classes (Command Pattern)
+├── controller.py # Logika bisnis aplikasi
+├── storage.py # Penyimpanan sementara (in-memory)
+└── view.py # Antarmuka pengguna berbasis teks
+
+
+---
+## 📷 Cuplikan Menu
+📝 Aplikasi To-Do List FSM (Design Pattern)
+
+1. Tambah task
+2. Lihat semua task aktif
+3. Tandai task selesai
+4. Cek deadline
+5. Lihat riwayat tugas
+0. Keluar
 
