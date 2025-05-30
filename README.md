@@ -78,4 +78,15 @@ Kode jadi lebih fleksibel dan reusable.
 
 Tidak perlu bikin ulang class yang sama untuk setiap jenis data.
 
+
+
+
+
+🔚 Kesimpulan Design Pattern yang Diterapkan
+Design Pattern	Fungsi	Tempat Diterapkan
+Singleton	Satu instance global untuk config	Config class
+Strategy	Logika status yang bisa diganti-ganti	Task class (status logic)
+Factory	Abstraksi penciptaan objek Task	TaskFactory class
+(Optional) Observer	Reaksi terhadap perubahan progress/status	Bisa ditambahkan ke Task
+
  
