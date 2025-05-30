@@ -1,25 +1,26 @@
+🔧 Design Pattern: Command Pattern
+Tujuan:
+Memisahkan logika perintah (seperti menampilkan tugas atau mengupdate progress) ke dalam objek-objek terpisah agar mudah dikelola, diperluas, dan diuji.
 
+Penerapan:
+Setiap menu seperti "Lihat Semua Tugas", "Update Progress Tugas", dan lainnya diwakili oleh kelas command:
 
- 2. Strategy Pattern – StatusStrategy
-Memisahkan logika penentuan status tugas berdasarkan progress.
+PrintAllTasksCommand
 
-python
+PrintCompletedTasksCommand
 
-class StatusStrategy:
-    def get_status(self, progress): pass
+PrintInProgressTasksCommand
 
-class DefaultStatusStrategy(StatusStrategy):
-    def get_status(self, progress):
-        if progress == 0: return "Not Started"
-        elif progress < 100: return "In Progress"
-        else: return "Completed"
-Digunakan di class Task:
+UpdateProgressCommand
 
-python
+ExitCommand
 
-class Task:
-    def __init__(..., status_strategy=None):
-        ...
-        self.status_strategy = status_strategy or DefaultStatusStrategy()
-        self.status = self.status_strategy.get_status(progress)
+Kelas MenuInvoker berfungsi mengeksekusi perintah berdasarkan input pengguna.
 
+Keuntungan:
+
+Kode lebih modular dan bersih.
+
+Mudah menambah atau mengubah aksi menu tanpa menyentuh struktur utama program.
+
+Cocok untuk sistem menu interaktif atau antarmuka pengguna.
