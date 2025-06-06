@@ -1,7 +1,7 @@
 """
 Factory Pattern untuk membuat instance task (TodoItem).
 """
-from models import TodoItem
+from ToDo.models import TodoItem
 
 class TaskFactory:
     @staticmethod

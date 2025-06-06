@@ -5,7 +5,7 @@ Menggunakan State Pattern dengan library 'transitions'.
 
 import datetime
 from transitions import Machine
-from config import Config
+from ToDo.config import Config
 
 config = Config()
 

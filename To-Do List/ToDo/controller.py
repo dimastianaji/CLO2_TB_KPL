@@ -3,10 +3,11 @@ Controller aplikasi: menangani logika bisnis, validasi, dan pemanggilan perintah
 """
 
 import datetime
-from config import Config
-from factory import TaskFactory
-from commands import CompleteTaskCommand, ExpireTaskCommand
-from storage import add_task, get_active_tasks
+from ToDo.config import Config
+from ToDo.factory import TaskFactory
+from ToDo.commands import CompleteTaskCommand, ExpireTaskCommand
+from ToDo.storage import add_task, get_active_tasks, todo_list
+
 
 config = Config()
 
@@ -14,7 +15,7 @@ def handle_create_task(title, deadline):
     """
     Membuat task baru jika belum melebihi batas maksimum.
     """
-    from storage import todo_list
+    from ToDo.storage import todo_list
     if len(todo_list) >= config.max_tasks:
         raise Exception("Maksimum jumlah task tercapai.")
     task = TaskFactory.create_task(title, deadline)

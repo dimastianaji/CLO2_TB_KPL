@@ -2,9 +2,9 @@ from controller import (
     handle_create_task, handle_complete_task,
     handle_check_deadlines
 )
-from storage import get_active_tasks, get_history_tasks
-from config import Config
-from view import print_menu, print_tasks
+from ToDo.storage import get_active_tasks, get_history_tasks
+from ToDo.config import Config
+from ToDo.view import print_menu, print_tasks
 
 config = Config()
 
