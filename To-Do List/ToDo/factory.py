@@ -1,6 +1,3 @@
-"""
-Factory Pattern untuk membuat instance task (TodoItem).
-"""
 from ToDo.models import TodoItem
 
 class TaskFactory:

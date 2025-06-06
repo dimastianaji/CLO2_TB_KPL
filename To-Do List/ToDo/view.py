@@ -1,11 +1,4 @@
-"""
-View layer: Menampilkan menu dan data ke pengguna.
-"""
-
 def print_menu():
-    """
-    Menampilkan menu utama.
-    """
     print("📝 Aplikasi To-Do List FSM (Design Pattern)\n")
     print("1. Tambah task")
     print("2. Lihat semua task aktif")
@@ -15,9 +8,6 @@ def print_menu():
     print("0. Keluar")
 
 def print_tasks(tasks, header):
-    """
-    Menampilkan daftar tugas.
-    """
     if not tasks:
         print("📭 Tidak ada tugas.\n")
     else:
