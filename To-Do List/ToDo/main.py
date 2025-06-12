@@ -2,7 +2,7 @@ from ToDo.controller import (
     handle_create_task, handle_complete_task,
     handle_check_deadlines, validate_title, validate_deadline
 )
-from ToDo.storage import Storage
+from ToDo.task_storage import Storage
 from ToDo.config import Config
 from ToDo.view import print_menu, print_tasks
 

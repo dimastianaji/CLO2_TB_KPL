@@ -1,3 +1,6 @@
+from memory_profiler import profile
+
+
 class Storage:
     _todo_list = []
 
@@ -9,6 +12,7 @@ class Storage:
     def get_all(cls):
         return cls._todo_list
 
+    @profile
     @classmethod
     def get_active(cls):
         return [t for t in cls._todo_list if t.status == 'Created']

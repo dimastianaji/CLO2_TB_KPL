@@ -1,8 +1,9 @@
 import datetime
+from memory_profiler import profile
 from ToDo.config import Config
 from ToDo.factory import TaskFactory
 from ToDo.commands import CompleteTaskCommand, ExpireTaskCommand
-from ToDo.storage import Storage
+from ToDo.task_storage import Storage
 
 config = Config()
 
@@ -20,6 +21,7 @@ def validate_title(title):
         raise ValueError("Judul task terlalu panjang (maks. 100 karakter).")
     return title
 
+@profile
 def handle_create_task(title, deadline):
     if len(Storage.get_all()) >= config.max_tasks:
         raise Exception("Maksimum jumlah task tercapai.")
@@ -38,6 +40,7 @@ def handle_complete_task(index):
     cmd.execute()
     return active[index]
 
+@profile
 def handle_check_deadlines(now=None):
     if now is None:
         now = datetime.datetime.now()

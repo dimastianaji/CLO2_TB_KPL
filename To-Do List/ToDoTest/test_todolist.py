@@ -1,7 +1,7 @@
 import unittest
 import datetime
 from ToDo.models import TodoItem, TaskFSM
-from ToDo.storage import Storage
+from ToDo.task_storage import Storage
 from ToDo.commands import CompleteTaskCommand, ExpireTaskCommand
 from ToDo.config import Config
 from ToDo.controller import (
